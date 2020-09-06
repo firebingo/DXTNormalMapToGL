@@ -1,0 +1,47 @@
+.min.js
+.min.css
+App_Data/
+
+# Folder config file
+Desktop.ini
+
+# Windows shortcuts
+*.lnk
+
+# Visual Studio / MonoDevelop generated #
+ExportedObj/
+*.svd
+*.userprefs
+*.pidb
+*.suo
+*.user
+*.cd
+*.tss
+bin/
+obj/
+packages/
+.vs/
+
+# Operating System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+#other
+*.pubxml
+/KidesServer/Properties/PublishProfiles
+/*.PublishSettings
