@@ -50,6 +50,8 @@ namespace DXTNormalMapToGl
 
 		public static void CovertDXTToGL(MagickImage source, BinaryWriter pixelDestStream)
 		{
+			if (source.ColorSpace == ColorSpace.Gray)
+				throw new NotSupportedException("Gray format not supported");
 			var sourcePixels = source.GetPixels();
 			for (var y = 0; y < source.Height; ++y)
 			{
@@ -58,16 +60,16 @@ namespace DXTNormalMapToGl
 					var sourcePixel = sourcePixels[x, y];
 					//Im assuming there is a g and a channel
 					//magick.net 16 reads these always as 16bit even if the source image isint
-					float sourcey = sourcePixel.GetChannel(1) / 65536;
-					float sourcex = sourcePixel.GetChannel(3) / 65536;
+					float sourcey = sourcePixel.GetChannel(1) / ushort.MaxValue;
+					float sourcex = sourcePixel.GetChannel(3) / ushort.MaxValue;
 
 					float destx = sourcex;
 					float desty = 1.0f - sourcey;
 					float destz = (float)Math.Sqrt(1.0f - (sourcex * sourcex + sourcey * sourcey));
 
-					pixelDestStream.Write((short)(destx * 65536));
-					pixelDestStream.Write((short)(desty * 65536));
-					pixelDestStream.Write((short)(destz * 65536));
+					pixelDestStream.Write((ushort)(destx * ushort.MaxValue));
+					pixelDestStream.Write((ushort)(desty * ushort.MaxValue));
+					pixelDestStream.Write((ushort)(destz * ushort.MaxValue));
 				}
 			}
 		}
